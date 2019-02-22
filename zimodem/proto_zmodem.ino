@@ -1676,7 +1676,7 @@ int zmodem_send_from(zmodem_t* zm, File* fp, uint64_t pos, uint64_t* sent)
       if(c == ZPAD) {
         /* ZMODEM.DOC: 
           FULL STREAMING WITH SAMPLING
-          If one of these characters (0x18/*CAN or ZPAD) is seen, an
+          If one of these characters (0x18/ *CAN or ZPAD) is seen, an
           empty ZCRCE data subpacket is sent.
         */
         zmodem_send_data(zm, ZCRCE, NULL, 0);
@@ -2153,7 +2153,7 @@ int zmodem_recv_init(zmodem_t* zm)
     }
 
     if(type==ZFIN) {
-      zmodem_send_zfin(zm); /* 0x06/*ACK */
+      zmodem_send_zfin(zm); /* 0x06/ *ACK */
       return(type);
     }
 

@@ -87,8 +87,8 @@ void ZCommand::setConfigDefaults()
   rtsInactive=DEFAULT_RTS_LOW;
   riActive = DEFAULT_RTS_HIGH;
   riInactive = DEFAULT_RTS_LOW;
-  dtrActive = DEFAULT_RTS_HIGH;
-  dtrInactive = DEFAULT_RTS_LOW;
+  dtrActive = DEFAULT_DTR_HIGH;
+  dtrInactive = DEFAULT_DTR_LOW;
   dsrActive = DEFAULT_RTS_HIGH;
   dsrInactive = DEFAULT_RTS_LOW;
   pinDCD = DEFAULT_PIN_DCD;
@@ -3237,6 +3237,36 @@ void ZCommand::serialIncoming()
   doSerialCommand();
 }
 
+void ZCommand::DTR_autodial()
+{
+  String dmodifiers = "";
+  int vval = 1234;
+  int vlen = 4;
+  if(pinSupport[pinDTR])
+  {
+    if(lastDTR==dtrInactive)
+    {
+      lastDTR = digitalRead(pinDTR);
+      if((lastDTR==dtrActive)
+      &&(dtrInactive != dtrActive))      
+      {
+        PhoneBookEntry *phb = phonebook;
+        if(phb->number == vval)
+      	{
+      		int addrLen=strlen(phb->address);
+      		uint8_t *vbuf = new uint8_t[addrLen+1];
+      		strcpy((char *)vbuf,phb->address);
+          //serial.prints("DTR dialing");
+      		ZResult res = doDialStreamCommand(0,vbuf,addrLen,false,phb->modifiers);
+      		free(vbuf);
+      	        //return res;
+      	}
+      }
+    }
+    lastDTR = digitalRead(pinDTR);
+  }
+}
+
 void ZCommand::loop()
 {
   checkPlusEscape();
@@ -3247,5 +3277,6 @@ void ZCommand::loop()
     serialOutDeque();
   }
   checkBaudChange();
+  DTR_autodial();
 }
 

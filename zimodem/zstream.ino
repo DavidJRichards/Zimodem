@@ -188,6 +188,7 @@ void ZStream::loop()
       if((lastDTR==dtrInactive)
       &&(dtrInactive != dtrActive))
       {
+//        serial.prints("<DTR Disconnect>");
         if(current != null)
           current->setDisconnectOnStreamExit(true);
         switchBackToCommandMode(true);

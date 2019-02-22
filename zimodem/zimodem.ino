@@ -39,7 +39,7 @@ const char compile_date[] = __DATE__ " " __TIME__;
 
 
 #ifdef ZIMODEM_ESP32
-# define DEFAULT_PIN_DCD GPIO_NUM_14
+# define DEFAULT_PIN_DCD GPIO_NUM_14atd1234
 # define DEFAULT_PIN_CTS GPIO_NUM_13
 # define DEFAULT_PIN_RTS GPIO_NUM_15 // unused
 # define DEFAULT_PIN_RI GPIO_NUM_32
@@ -79,8 +79,8 @@ const char compile_date[] = __DATE__ " " __TIME__;
 #endif
 
 #ifdef RS232_INVERTED
-# define DEFAULT_DCD_HIGH  HIGH
-# define DEFAULT_DCD_LOW  LOW
+# define DEFAULT_DCD_HIGH  LOW // djrm inverted
+# define DEFAULT_DCD_LOW  HIGH
 # define DEFAULT_CTS_HIGH  HIGH
 # define DEFAULT_CTS_LOW  LOW
 # define DEFAULT_RTS_HIGH  HIGH
@@ -89,8 +89,8 @@ const char compile_date[] = __DATE__ " " __TIME__;
 # define DEFAULT_RI_LOW  LOW
 # define DEFAULT_DSR_HIGH  HIGH
 # define DEFAULT_DSR_LOW  LOW
-# define DEFAULT_DTR_HIGH  HIGH
-# define DEFAULT_DTR_LOW  LOW
+# define DEFAULT_DTR_HIGH  LOW // djrm inverted
+# define DEFAULT_DTR_LOW  HIGH
 #else
 # define DEFAULT_DCD_HIGH  LOW
 # define DEFAULT_DCD_LOW  HIGH

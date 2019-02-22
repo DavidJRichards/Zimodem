@@ -107,6 +107,7 @@ class ZCommand : public ZMode
     String previousCommand = "";
     WiFiClientNode *nextConn=null;
     int lastPacketId = -1;
+    int lastDTR = 0;
 
     byte CRC8(const byte *data, byte len);
 
@@ -114,6 +115,7 @@ class ZCommand : public ZMode
     bool readSerialStream();
     bool clearPlusProgress();
     bool checkPlusEscape();
+    void DTR_autodial();
     String getNextSerialCommand();
     ZResult doSerialCommand();
     void setConfigDefaults();
